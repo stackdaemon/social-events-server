@@ -80,7 +80,30 @@ async function run() {
       res.send(result);
     });
 
-    
+    //update
+    app.put("/events/:id", async (req, res) => {
+      const { id } = req.params;
+      const data = req.body;
+      const objectId = new ObjectId(id);
+      const filter = { _id: objectId };
+      const update = {
+        $set: data,
+      };
+      const result = await eventCollection.updateOne(filter, update);
+      res.send({
+        success: true,
+        result,
+      });
+    });
+
+// search 
+    app.get('/search',async (req,res)=>{
+      const search_text =req.query.search
+      const result =await eventCollection.find({title:{$regex:search_text,$options:"i"}}).toArray()
+      res.send(result)
+    })
+
+
 
 
 

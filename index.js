@@ -102,6 +102,23 @@ async function run() {
       const result =await eventCollection.find({title:{$regex:search_text,$options:"i"}}).toArray()
       res.send(result)
     })
+// select 
+app.get('/select', async (req, res) => {
+  try {
+    const select_text = req.query.select;
+    console.log("Filter value from client:", select_text);
+    let query = {};
+    if (select_text && select_text !== "all") {
+      query = { eventType: { $regex: select_text, $options: "i" } };
+    }
+
+    const result = await eventCollection.find(query).toArray();
+    res.send(result);
+  } catch (error) {
+    console.error("Error fetching select data:", error);
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
 
 
 

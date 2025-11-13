@@ -34,6 +34,27 @@ async function run() {
       res.send(result);
     });
 
+    // //!joined  [part2 [5]]
+    // app.get("/joined-event", async (req, res) => {
+    //   const email = req.query.email;
+    //   let query = {};
+    //   if (email) {
+    //     query.email = email;
+    //   }
+    //   const result = await joinedEventsCollection.find(query).toArray();
+    //   res.send(result);
+    // });
+
+    // data post korbo mongodb te[]
+    app.post("/events", async (req, res) => {
+      const data = req.body;
+      const result = await eventCollection.insertOne(data);
+      res.send(
+        result,
+      );
+    });
+  
+
 
 
 

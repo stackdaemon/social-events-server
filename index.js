@@ -53,16 +53,16 @@ async function run() {
         result,
       );
     });
-    // //! joined btn  ar   kaj[]
-    // app.post("/joined-event", async (req, res) => {
-    //   const data = req.body;
-    //   const result = await joinedEventsCollection.insertOne(data);
-    //   console.log(data);
-    //   res.send({
-    //     success: true,
-    //     result,
-    //   });
-    // });
+    //! joined btn  ar   kaj[]
+    app.post("/joined-event", async (req, res) => {
+      const data = req.body;
+      const result = await joinedEventsCollection.insertOne(data);
+      console.log(data);
+      res.send({
+        success: true,
+        result,
+      });
+    });
     //*  details page
     app.get("/events/:id", async (req, res) => {
       const { id } = req.params;
@@ -73,6 +73,11 @@ async function run() {
         result,
       });
     });
+
+ 
+
+
+
 
 
 

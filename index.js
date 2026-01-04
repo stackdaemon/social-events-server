@@ -3,13 +3,13 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const cors = require("cors");
 const app = express();
 const port = 5000;
-
+require("dotenv").config()
 // middleware
 app.use(cors());
 app.use(express.json());
 
 const uri =
-  "mongodb+srv://social-events:m0QU0r2Rc60lsYDy@cluster0.zaaoh0g.mongodb.net/?appName=Cluster0";
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.zaaoh0g.mongodb.net/?appName=Cluster0`
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -23,7 +23,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const db = client.db("social-events");
     const eventCollection = db.collection("events");
@@ -140,7 +140,7 @@ app.get('/select', async (req, res) => {
 
     
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
